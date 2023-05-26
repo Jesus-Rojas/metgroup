@@ -15,6 +15,10 @@ class Matriz {
     return this.getCompute(this.array)
   }
 
+  get straight() {
+    return this.getStraight(this.array)
+  }
+
   validateMatrizRecursive(array) {
     if (typeof array === 'number') return;
     if (!isArray(array)) throw new Error('Should be a number')
@@ -31,8 +35,23 @@ class Matriz {
     return maxProfundidad + 1;
   }
 
-  straight() {
+  getStraight(array, boolean = true) {
+    const existSubArrays = array.some(value => isArray(value));
+    if (!existSubArrays) {
+      return true;
+    }
 
+    const dimensions = []
+
+    for (const iterator of array) {
+      if (isArray(iterator)) {
+        dimensions.push(this.getDimension(iterator))
+      }
+    }
+
+    if (dimensions.length === 0) return true
+
+    return dimensions.every(e => dimensions[0])
   }
 
   getCompute(array) {
@@ -43,10 +62,22 @@ class Matriz {
   }
 }
 
-const prueba = new Matriz([[[1,[],[],[[[[[[[]]]]]]]]],1,[1,[1,2,3,[5,4]]]])
-console.log(prueba.dimension);
-console.log(prueba.compute);
+const a = [1,2], 
+  b = [[1,2],[2,4]], 
+  c = [[1,2],[2,4],[2,4]], 
+  d = [[[3,4],[6,5]]], 
+  e = [[[1, 2, 3]], [[5, 6, 7], [5, 4, 3]], [[3, 5, 6], [4, 8, 3], [2, 3]]], 
+  f = [[[1, 2, 3], [2, 3, 4]], [[5, 6, 7], [5, 4, 3]], [[3, 5, 6], [4, 8, 3]]];
 
-// a. o.dimension -> Devuelve el número entero que define la dimensión del arreglo o matriz en su mayor profundidad.
-// b. o.straight -> Devuelve true o false según el siguiente criterio: -True: Si el arreglo o matriz contiene la misma cantidad de elementos en cada una de sus dimensiones (Matriz uniforme). -False: Caso contrario.
-// c. o.compute -> Devuelve el número entero resultado de la suma de todos los números incluídos en la matriz sin importar el tamaño o dimensión.
+const showLogs = (type = '') => {
+  console.log(`=======  Start ${type}  =======`);
+  [a, b, c, d, e, f].forEach(value => {
+  // [a,b,c,d,e,f].forEach(value => {
+    console.log(new Matriz(value)[type.toLowerCase()]);
+  })
+  console.log(`=======  End ${type}  =======\n`);
+}
+
+// showLogs('Dimension')
+// showLogs('Compute')
+showLogs('Straight')
