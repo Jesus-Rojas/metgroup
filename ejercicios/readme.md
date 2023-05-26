@@ -1,0 +1,1 @@
+1. Construya un objeto que reciba un arreglo o una matriz de dimensión N el cual contiene números de tipo entero.
