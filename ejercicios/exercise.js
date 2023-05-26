@@ -7,17 +7,20 @@ class Matriz {
     this.array = array
   }
 
+  get dimension() {
+    return this.getDimension(this.array)
+  }
+
+  get compute() {
+    return this.getCompute(this.array)
+  }
+
   validateMatrizRecursive(array) {
     if (typeof array === 'number') return;
     if (!isArray(array)) throw new Error('Should be a number')
     for (const value of array) {
       this.validateMatrizRecursive(value)
     }
-  }
-
-
-  get dimension() {
-    return this.getDimension(this.array)
   }
 
   getDimension(array) {
@@ -32,13 +35,17 @@ class Matriz {
 
   }
 
-  compute() {
-
+  getCompute(array) {
+    return array.reduce(
+      (suma, value) => suma + (isArray(value) ? this.getCompute(value) : value),
+      0
+    );
   }
 }
 
 const prueba = new Matriz([[[1,[],[],[[[[[[[]]]]]]]]],1,[1,[1,2,3,[5,4]]]])
 console.log(prueba.dimension);
+console.log(prueba.compute);
 
 // a. o.dimension -> Devuelve el número entero que define la dimensión del arreglo o matriz en su mayor profundidad.
 // b. o.straight -> Devuelve true o false según el siguiente criterio: -True: Si el arreglo o matriz contiene la misma cantidad de elementos en cada una de sus dimensiones (Matriz uniforme). -False: Caso contrario.
