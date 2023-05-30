@@ -35,23 +35,19 @@ class Matriz {
     return maxProfundidad + 1;
   }
 
-  getStraight(array, boolean = true) {
-    const existSubArrays = array.some(value => isArray(value));
-    if (!existSubArrays) {
-      return true;
-    }
-
-    const dimensions = []
-
-    for (const iterator of array) {
-      if (isArray(iterator)) {
-        dimensions.push(this.getDimension(iterator))
+  getStraight(array) {
+    const containSubArrays = array.some(value => 'object' === typeof value);
+    if (!containSubArrays) return true;
+    const isEqualToLength = array.map(value => value.length)
+    const allIsEqual = isEqualToLength.every(value => value === isEqualToLength[0])
+    if (!allIsEqual) return false;
+    for (const value of array) {
+      if (isArray(value)) {
+        const res = this.getStraight(value)
+        if (!res) return false
       }
+      return true
     }
-
-    if (dimensions.length === 0) return true
-
-    return dimensions.every(e => dimensions[0])
   }
 
   getCompute(array) {
@@ -72,12 +68,11 @@ const a = [1,2],
 const showLogs = (type = '') => {
   console.log(`=======  Start ${type}  =======`);
   [a, b, c, d, e, f].forEach(value => {
-  // [a,b,c,d,e,f].forEach(value => {
     console.log(new Matriz(value)[type.toLowerCase()]);
   })
   console.log(`=======  End ${type}  =======\n`);
 }
 
-// showLogs('Dimension')
-// showLogs('Compute')
+showLogs('Dimension')
+showLogs('Compute')
 showLogs('Straight')
