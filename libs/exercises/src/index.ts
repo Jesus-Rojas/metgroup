@@ -75,5 +75,5 @@ const showLogs = (type = '') => {
 }
 
 showLogs('Dimension')
-showLogs('Compute')
 showLogs('Straight')
+showLogs('Compute')
