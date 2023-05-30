@@ -1,7 +1,7 @@
-const isArray = (value) => typeof value === 'object' && Array.isArray(value);
+const isArray = (value: any) => typeof value === 'object' && Array.isArray(value);
 
 class Matriz {
-  constructor (array) {
+  constructor (private array: any) {
     if (!isArray(array)) throw new Error('Should be an array of numbers')
     this.validateMatrizRecursive(array)
     this.array = array
@@ -19,7 +19,7 @@ class Matriz {
     return this.getStraight(this.array)
   }
 
-  validateMatrizRecursive(array) {
+  validateMatrizRecursive(array: any) {
     if (typeof array === 'number') return;
     if (!isArray(array)) throw new Error('Should be a number')
     for (const value of array) {
@@ -27,19 +27,19 @@ class Matriz {
     }
   }
 
-  getDimension(array) {
+  getDimension(array: any) {
     if (!isArray(array)) return 0;
     if (array.length === 0) return 1;
-    const profundidades = array.map(value => this.getDimension(value));
+    const profundidades = array.map((value: any) => this.getDimension(value));
     const maxProfundidad = Math.max(...profundidades);
     return maxProfundidad + 1;
   }
 
-  getStraight(array) {
-    const containSubArrays = array.some(value => 'object' === typeof value);
+  getStraight(array: any) {
+    const containSubArrays = array.some((value: any) => 'object' === typeof value);
     if (!containSubArrays) return true;
-    const isEqualToLength = array.map(value => value.length)
-    const allIsEqual = isEqualToLength.every(value => value === isEqualToLength[0])
+    const isEqualToLength = array.map((value: any) => value.length)
+    const allIsEqual = isEqualToLength.every((value: any) => value === isEqualToLength[0])
     if (!allIsEqual) return false;
     for (const value of array) {
       if (isArray(value)) {
@@ -48,11 +48,12 @@ class Matriz {
       }
       return true
     }
+    return true
   }
 
-  getCompute(array) {
+  getCompute(array: any) {
     return array.reduce(
-      (suma, value) => suma + (isArray(value) ? this.getCompute(value) : value),
+      (suma: number, value: any) => suma + (isArray(value) ? this.getCompute(value) : value),
       0
     );
   }
@@ -67,8 +68,8 @@ const a = [1,2],
 
 const showLogs = (type = '') => {
   console.log(`=======  Start ${type}  =======`);
-  [a, b, c, d, e, f].forEach(value => {
-    console.log(new Matriz(value)[type.toLowerCase()]);
+  [a, b, c, d, e, f].forEach((value) => {
+    console.log((new Matriz(value) as any)[type.toLowerCase()]);
   })
   console.log(`=======  End ${type}  =======\n`);
 }

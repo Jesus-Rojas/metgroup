@@ -1,0 +1,26 @@
+{
+  "name": "exercises",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/exercises/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/exercises",
+        "main": "libs/exercises/src/index.ts",
+        "tsConfig": "libs/exercises/tsconfig.lib.json",
+        "assets": ["libs/exercises/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/exercises/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
