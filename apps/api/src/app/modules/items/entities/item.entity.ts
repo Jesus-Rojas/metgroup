@@ -1,8 +1,9 @@
+import { ItemDTO } from "@metgroup/api-interfaces";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Stores } from "../../stores/entities/stores.entity";
+import { Store } from "../../stores/entities/stores.entity";
 
-@Entity()
-export class Items {
+@Entity('items')
+export class Item implements ItemDTO {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
@@ -13,8 +14,9 @@ export class Items {
   price: number;
 
   @ManyToOne(
-    () => Stores,
+    () => Store,
     (store) => store.items,
+    { eager: true }
   )
-  store: Stores;
+  store: Store;
 }

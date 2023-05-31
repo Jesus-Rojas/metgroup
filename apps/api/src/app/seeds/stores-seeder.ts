@@ -1,12 +1,12 @@
 import { DataSource } from 'typeorm';
-import { Seeder, SeederFactoryManager } from 'typeorm-extension';
-import { Stores } from '../modules/stores/entities/stores.entity';
-import { Store } from '../modules/stores/types/store.interface';
+import { Seeder } from 'typeorm-extension';
+import { Store } from '../modules/stores/entities/stores.entity';
+import { Store as StoreI } from '../modules/stores/types/store.interface';
 
 export class StoresSeeder implements Seeder {
-  async run(dataSource: DataSource, factoryManager: SeederFactoryManager) {
-    const storeRepository = dataSource.getRepository(Stores);
-    const stores: Store[] = [
+  async run(dataSource: DataSource) {
+    const storeRepository = dataSource.getRepository(Store);
+    const stores: StoreI[] = [
       { id: 1, name: 'test' },
       { id: 2, name: 'test2' },
       { id: 3, name: 'test3' },

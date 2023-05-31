@@ -1,18 +1,21 @@
+import { StoreDTO } from "@metgroup/api-interfaces";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Items } from "../../items/entities/items.entity";
-import { Store } from "../types/store.interface";
+import { Item } from "../../items/entities/item.entity";
 
-@Entity()
-export class Stores implements Store {
+@Entity('stores')
+export class Store implements StoreDTO {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
+  @Column({
+    unique: true
+  })
   name: string;
 
   @OneToMany(
-    () => Items,
+    () => Item,
     (item) => item.store,
+    { onDelete: 'CASCADE', eager: true }
   )
-  items: Items[];
+  items: Item[];
 }

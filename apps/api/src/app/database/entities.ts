@@ -1,7 +1,9 @@
-import { Items } from "../modules/items/entities/items.entity";
-import { Stores } from "../modules/stores/entities/stores.entity";
+import { Item } from "../modules/items/entities/item.entity";
+import { Store } from "../modules/stores/entities/stores.entity";
+import { User } from "../modules/users/entities/user.entity";
 
 export const entities = [
-  Items,
-  Stores
+  Item,
+  Store,
+  User
 ];
