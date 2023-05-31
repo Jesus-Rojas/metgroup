@@ -9,6 +9,6 @@ Exercises and crud.
 
 ```bash
 npm i
-npm run run:exercises
+npm run exercises
 ```
 

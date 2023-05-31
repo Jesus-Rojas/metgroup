@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "run:exercises": "npx nx build exercises && node ./dist/libs/exercises/src/index.js",
+    "exercises": "npx nx build exercises && node ./dist/libs/exercises/src/index.js",
     "ts-node-typeorm": "ts-node -r tsconfig-paths/register -P ./apps/api/tsconfig.json",
     "typeorm": "npm run ts-node-typeorm -- ./node_modules/typeorm/cli -d ./apps/api/src/database/data-source.ts",
     "typeorm:migration-generate": "npm run typeorm -- migration:generate ./apps/api/src/migrations/%npm_config_name%",
